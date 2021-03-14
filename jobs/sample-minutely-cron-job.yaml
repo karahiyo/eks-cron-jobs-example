@@ -16,6 +16,7 @@ spec:
       backoffLimit: 0
       template:
         spec:
+          serviceAccountName: sample-cron-job-role
           containers:
           - name: batch-container
             image: python:3.8-slim

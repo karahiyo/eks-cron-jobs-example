@@ -6,16 +6,17 @@ spec:
   schedule: "5 * * * *"
   concurrencyPolicy: Forbid
   startingDeadlineSeconds: 10
-  successfulJobsHistoryLimit: 10
-  failedJobsHistoryLimit: 10
+  successfulJobsHistoryLimit: 5
+  failedJobsHistoryLimit: 5
   suspend: False
   jobTemplate:
     spec:
       completions: 1
       parallelism: 1
-      backoffLimit: 0
+      backoffLimit: 3
       template:
         spec:
+          serviceAccountName: sample-cron-job-role
           containers:
           - name: batch-container
             image: python:3.8-slim
