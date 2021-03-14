@@ -9,7 +9,6 @@ spec:
   startingDeadlineSeconds: 10
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 3
-  suspend: False
   jobTemplate:
     spec:
       completions: 1
@@ -22,6 +21,13 @@ spec:
           - name: batch-container
             image: python:3.8-slim
             command: ["python", "-c", "print('hello')"]
+            resources:
+              requests:
+                cpu: 100m
+                memory: 100Mi
+              limits:
+                cpu: 100m
+                memory: 100Mi
           restartPolicy: Never
 ---
 apiVersion: v1
