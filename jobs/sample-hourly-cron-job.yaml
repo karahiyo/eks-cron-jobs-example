@@ -17,15 +17,15 @@ spec:
       backoffLimit: 3
       template:
         spec:
-          serviceAccountName: sample-hourly-cron-job-role
+          serviceAccountName: sample-hourly-cron-job
           containers:
           - name: batch-container
             image: python:3.8-slim
             command: ["python", "-c", "print('hello')"]
           restartPolicy: OnFailure
 ---
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
+apiVersion: v1
+kind: ServiceAccount
 metadata:
-  name: sample-hourly-cron-job-role
+  name: sample-hourly-cron-job
   namespace: default

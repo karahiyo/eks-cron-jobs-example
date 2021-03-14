@@ -1,9 +1,10 @@
+---
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: sample-minutely-cron-job
 spec:
-  schedule: "*/5 * * * *"
+  schedule: "*/1 * * * *"
   concurrencyPolicy: Forbid
   startingDeadlineSeconds: 10
   successfulJobsHistoryLimit: 3
@@ -16,9 +17,16 @@ spec:
       backoffLimit: 0
       template:
         spec:
-          serviceAccountName: sample-cron-job-role
+          serviceAccountName: sample-minutely-cron-job
           containers:
           - name: batch-container
             image: python:3.8-slim
             command: ["python", "-c", "print('hello')"]
           restartPolicy: Never
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: sample-minutely-cron-job
+  namespace: default
+
