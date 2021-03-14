@@ -1,7 +1,12 @@
-Kubernetes Cron Jobs Example on EKS
-====================================
+Kubernetes Cron Jobs Example on Amazon EKS
+==========================================
 
 # Quick Start
+
+## 0. Prerequisites
+
+- [kubectl](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html)
+- [eksctl](https://github.com/weaveworks/eksctl)
 
 ## 1. Create Cluster
 
@@ -15,18 +20,11 @@ $ eksctl create cluster \
   --fargate
 ```
 
-
 ## 2. IAM RoleとKubernetes service accountの作成
 
-ref: https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html
+ref https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html
 
-#### Prerequisites
-
-- OIDC Provider作成済みであること
-  - https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html
-- IAM Roleにattachするpolicy作成しておくこと
-
-Kubernets ServiceAccountとIAM Roleを作成しその２つを関連付ける。IAM Roleには指定したIAM PolicyがAttachされる
+Kubernets ServiceAccountとIAM Roleを作成しその２つを関連付ける。IAM Roleには指定したIAM PolicyがAttachされます。参考: https://aws.amazon.com/jp/blogs/news/introducing-fine-grained-iam-roles-service-accounts/
 
 ```sh
 eksctl create iamserviceaccount \
@@ -46,15 +44,4 @@ eksctl create iamserviceaccount \
 $ kubectl apply -f ./jobs -R
 ```
 
-確認
-
-```
-$ kubectl get cronjobs -o wide
-```
-
-ログの確認
-
-```
-$ stern example-
-```
 
